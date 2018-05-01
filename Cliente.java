@@ -1,3 +1,8 @@
+package fp07;
+
+import java.io.Serializable;
+import java.util.Objects;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,7 +13,7 @@
  *
  * @author pedro
  */
-public class Cliente {
+public class Cliente implements Serializable   {
     
     public String cat;
     public String ip;
@@ -52,6 +57,26 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" + "cat=" + cat + ", ip=" + ip + ", port=" + port + '}';
+    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.cat, other.cat)) {
+            return false;
+        }
+        return true;
     }
     
     
