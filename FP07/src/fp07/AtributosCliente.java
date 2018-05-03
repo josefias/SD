@@ -5,13 +5,20 @@
  */
 package fp07;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Utilizador
  */
-public class AtributosCliente {
+public class AtributosCliente implements Serializable{
         String Name;
         ArrayList<Produto> Lista;
         Cliente dados;
@@ -110,5 +117,38 @@ public void genClient(){
       n = ler.umInt();
       if(n == 1)
           this.setLista(p.genListaProd());
-    }      
+    }  
+
+         public  AtributosCliente Ler_Fich(File f) throws ClassNotFoundException{
+              AtributosCliente ret = new AtributosCliente();
+             try{
+                   
+                    FileInputStream fis = new FileInputStream(f);
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+
+                    ret = (AtributosCliente )ois.readObject();
+                    ois.close();
+                }catch(IOException e){e.printStackTrace();}
+        return ret;
+    }
+    public  void Guardar_No_Ficheiro(File f, ArrayList<Object> o){
+            try{
+                FileOutputStream fos = new FileOutputStream(f);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                oos.writeObject(o);
+                oos.close();
+            }catch(IOException e){e.printStackTrace();}
+            
+       }
+     public  void Guardar_No_FicheiroCli(File f, AtributosCliente o){
+            try{
+                FileOutputStream fos = new FileOutputStream(f);
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                oos.writeObject(o);
+                oos.close();
+            }catch(IOException e){e.printStackTrace();}
+            
+       }
 }

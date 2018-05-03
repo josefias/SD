@@ -5,13 +5,14 @@
  */
 package fp07;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Utilizador
  */
-public class Produto {
+public class Produto implements Serializable {
     public static int id = 0;
     public String nome;
     public double preco;
