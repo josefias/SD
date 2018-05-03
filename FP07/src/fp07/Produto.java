@@ -5,6 +5,8 @@
  */
 package fp07;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Utilizador
@@ -49,10 +51,29 @@ public class Produto {
     public static int getId() {
         return id;
     }
-
+    public ArrayList<Produto> genListaProd(){
+        ArrayList<Produto> ret = new ArrayList<Produto>();
+        Produto p = new Produto();
+        int flag = 1;
+        while(true){
+            System.out.print("===Produtos===\n"
+                             + "Nome :");
+            p.setNome(ler.umaString());
+            System.out.print("Preço :");
+            p.setPreco(ler.umDouble());
+            System.out.print("stock :");
+            p.setStock(ler.umInt());
+            
+            ret.add(p);
+            System.out.println("adicionar mais produtos?\n(1-sim | 0-nao)");
+            flag = ler.umInt();
+            if(flag == 0)
+                return ret;
+        }
+    }
     @Override
     public String toString() {
-        return "Produto{" + "nome=" + nome + ", preco=" + preco + ", stock=" + stock + '}';
+        return "nome=" + nome + "| preco=" + preco + "| stock=" + stock + '|';
     }
     
     

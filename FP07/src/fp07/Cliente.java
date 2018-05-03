@@ -56,7 +56,7 @@ public class Cliente implements Serializable   {
 
     @Override
     public String toString() {
-        return "Cliente{" + "cat=" + cat + ", ip=" + ip + ", port=" + port + '}';
+        return "cat=" + cat + ", ip=" + ip + ", port=" + port + '\n';
     }
 
     

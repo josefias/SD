@@ -55,7 +55,15 @@ public class HelloServer extends java.rmi.server.UnicastRemoteObject
         System.out.println("Subscribing " + s);
         client = c;
     }
-    
+    public static void Ler_Fich(File f) throws ClassNotFoundException{
+        try{
+                    FileInputStream fis = new FileInputStream(f);
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+
+                    cli = (ArrayList<Cliente> )ois.readObject();
+                    ois.close();
+                }catch(IOException e){e.printStackTrace();}
+    }
     public static void Guardar_No_Ficheiro(File f, ArrayList<Object> o){
             try{
                 FileOutputStream fos = new FileOutputStream(f);
@@ -69,24 +77,30 @@ public class HelloServer extends java.rmi.server.UnicastRemoteObject
     
     
     public void registarCliente(Cliente c) throws java.rmi.RemoteException{
-           cli.add(c);
-           System.out.println(c);
-           try{
-                FileOutputStream fos = new FileOutputStream(fc);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+        int flag = 0;
+        for (int i = 0; i < cli.size(); i++) {
+            if(c.getIp().equals(cli.get(i)))
+                flag++;
+        }
+           if(flag == 0){
+            cli.add(c);
+               System.out.println(c);
+               try{
+                    FileOutputStream fos = new FileOutputStream(fc);
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-                oos.writeObject(cli);
-                oos.close();
-            }catch(IOException e){e.printStackTrace();}
+                    oos.writeObject(cli);
+                    oos.close();
+                }catch(IOException e){e.printStackTrace();}
        }
+    }
     
     
     
-    
-    public static void main(String [] args){
+    public static void main(String [] args) throws ClassNotFoundException{
         String s;
         System.setSecurityManager(new SecurityManager());
-    
+        Ler_Fich(fc);
     try{
         java.rmi.registry.LocateRegistry.createRegistry(1099);
         System.out.println("RMI registry ready");
