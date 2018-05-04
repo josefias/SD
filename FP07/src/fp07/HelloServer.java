@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class HelloServer extends java.rmi.server.UnicastRemoteObject
  implements Hello_S_I{
     private  Hello_C_I client;
-    private static File fc = new File("C:\\Users\\Utilizador\\Desktop\\tudo\\UBI\\poo\\FP07\\src\\fp07\\Cata.dat"); 
+    private static File fc = new File("C:\\Users\\Utilizador\\Desktop\\SD\\FP07\\src\\fp07\\Cata.dat"); 
        static ArrayList<String> p = new ArrayList<String>();
        static ArrayList<String> pp = new ArrayList<String>();
        static ArrayList<Cliente> cli = new ArrayList<Cliente>();
@@ -20,12 +20,13 @@ public class HelloServer extends java.rmi.server.UnicastRemoteObject
         super();
     }
     //MÃ©todo remoto
-    public void Listar(String s,Hello_C_I c) throws java.rmi.RemoteException{
+    public ArrayList<Cliente> Listar(String s,Hello_C_I c) throws java.rmi.RemoteException{
        int flag = 0;
        client = c;
+       ArrayList<Cliente> aux = new ArrayList<Cliente>();
         for (int i = 0; i < cli.size(); i++) {
             if(cli.get(i).getCat().equals(s)){
-                client.printOnClient(cli.get(i).toString());
+                aux.add(cli.get(i));
                 flag++;
             }
         }
@@ -33,6 +34,7 @@ public class HelloServer extends java.rmi.server.UnicastRemoteObject
         if(flag == 0)    
             client.printOnClient("pedimos desculpa, no hay");
         System.out.println("SERVER: "+ s);
+    return aux;
     }
          public void Listar(Hello_C_I c) throws java.rmi.RemoteException{
        int flag = 0;
@@ -55,6 +57,20 @@ public class HelloServer extends java.rmi.server.UnicastRemoteObject
         System.out.println("Subscribing " + s);
         client = c;
     }
+    
+    public void RemoveCli(Cliente c) throws java.rmi.RemoteException{
+        int flag = 0;
+        for (int i = 0; i < cli.size(); i++) {
+            if(c.equals(cli.get(i))){
+                cli.remove(i);
+                flag++;
+            }    
+        }
+    if(flag != 0)
+        Guardar_No_Ficheiro(fc,(ArrayList) cli);
+    }
+    
+    
     public static void Ler_Fich(File f) throws ClassNotFoundException{
         try{
                     FileInputStream fis = new FileInputStream(f);
