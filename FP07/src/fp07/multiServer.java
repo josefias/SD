@@ -21,11 +21,12 @@ public class multiServer extends Thread{
  private Conection c;
  private int cli;
  private int port;
+ private AtributosCliente me;
  
- 
- public multiServer(int port){
+ public multiServer(AtributosCliente me, int port){
  super();
  this.port = port;
+ this.me = me;
  start();
  } 
  
@@ -42,7 +43,7 @@ public void run(){
     while (true) {
     cli++;
     s = ss.accept();
-    c = new Conection(s,cli);
+    c = new Conection(me,s,cli);
     
     }
  }

@@ -22,7 +22,7 @@ public class MultiThread {
     
     ObjectInputStream is = new ObjectInputStream( s.getInputStream() );
     System.out.println( is.readObject() );
-    System.out.println( is.readObject() );
+    
     s.close();
     }//try
      catch ( IOException e)

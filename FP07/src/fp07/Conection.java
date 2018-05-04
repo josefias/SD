@@ -20,27 +20,26 @@ import java.util.logging.Logger;
 public class Conection extends Thread {
  private Socket S;
  private int cli;
- public Conection ( Socket s ,int n) {
+ private AtributosCliente me;
+ public Conection (AtributosCliente me, Socket s ,int n) {
  super();
  S = s;
  cli = n;
+ this.me = me;
  start();
 }
  
   public void run () {
- try {
- ObjectOutputStream os = new ObjectOutputStream( S.getOutputStream());
+    try {
+    ObjectOutputStream os = new ObjectOutputStream( S.getOutputStream());
 
- os.writeObject ( "A data e hora do sistema: " + new java.util.Date() );
- os.flush();
- sleep(3000);
- os.writeObject ( "A data e hora do sistema: " + new java.util.Date() );
- os.flush();
- 
- }
- catch ( IOException e) {System.out.println(e.getMessage());} 
- catch (InterruptedException ex) {
-     System.out.println(ex.getMessage());     }
+    os.writeObject ( "o vendedor : "+ me.getName() +"contacto : "+me.getTele()+"\n"
+                   +"----Produtos----\n" + me.getLista());
+    os.flush();
+
+
+    }
+    catch ( IOException e) {System.out.println(e.getMessage());} 
  }
   
 }

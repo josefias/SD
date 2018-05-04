@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -56,4 +55,5 @@ public class tesster {
     
     System.out.println("agora temos os dados do cliente\n"+cli);
     cli.Guardar_No_FicheiroCli(fc, cli);
+}
 }

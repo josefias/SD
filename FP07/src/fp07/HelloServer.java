@@ -8,8 +8,7 @@ import java.rmi.*;
 import java.io.*;
 import java.util.ArrayList;
 
-public class HelloServer extends java.rmi.server.UnicastRemoteObject
- implements Hello_S_I{
+public class HelloServer extends java.rmi.server.UnicastRemoteObject  implements Hello_S_I{
     private  Hello_C_I client;
     private static File fc = new File("C:\\Users\\Utilizador\\Desktop\\SD\\FP07\\src\\fp07\\Cata.dat"); 
        static ArrayList<String> p = new ArrayList<String>();

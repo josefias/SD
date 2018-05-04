@@ -73,7 +73,7 @@ Hello_C_I{
     int aux = 0;
       
     h.subscribe( cli.getName(), (Hello_C_I)c);
-       multiServer CliServer = new multiServer(cli.getDados().getPort());
+       multiServer CliServer = new multiServer(cli,cli.getDados().getPort());
              System.out.println("ONLINE");
     
        while(x!=0 ){
